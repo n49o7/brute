@@ -17,7 +17,7 @@ Define your templates using the standard HTML data- attributes to target a certa
 
 ## Example
 
-A YAML representation of the data that is passed:
+A YAML representation of the data that is passed :
 
 ```yaml
 title: "Class of 2020"
@@ -37,6 +37,8 @@ notes:
   - List item 3
 ```
 
+A page that will display the data :
+
 ```html
 <script src="Brute.js"></script>
 <script>
@@ -49,11 +51,11 @@ notes:
 </script>
 
 <body>
+  
   <div data-bind="data.title"></div>
-  <div data-iterate="data.people" data-template="personTemplate">
-  </div>
-  <div data-iterate="data.notes" data-template="noteTemplate">
-  </div>
+  <div data-iterate="data.people" data-template="personTemplate"></div>
+  <div data-iterate="data.notes" data-template="noteTemplate"></div>
+  
   <template id="personTemplate">
     <div class="row">
       <div data-bind="_"></div>
@@ -61,9 +63,11 @@ notes:
       <div data-bind="hair"></div>
     </div>
   </template>
+  
   <template id="noteTemplate">
     <div data-bind="_"></div>
   </template>
+  
 </body>
 
 <style>
