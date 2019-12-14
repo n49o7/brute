@@ -1,7 +1,7 @@
 let Brute = {
 
     pathResult: function (path) {
-        x = path.split(/(\[\\*["'])|(\\*["']\])|\./g)
+        x = path.split(/\[|\]|(\[\\*["'])|(\\*["']\])|\./g)
         y = [...x.slice(1)].filter(i => /[\w+]/g.test(i) && i !== undefined)
         z = y.map(i => '["'+i+'"]')
         path = [x[0], ...z].join('')
