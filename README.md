@@ -4,7 +4,7 @@ DOM filler for simple webapps where the data can contain Objects and/or Arrays.
 
 Relies on HTML template elements.
 
-Most useful when attached to an event.
+Can be used once or attached to an event.
 
 ## Usage
 
