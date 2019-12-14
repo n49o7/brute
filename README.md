@@ -18,7 +18,7 @@ Define your templates using the standard HTML data- attributes to target a certa
 
 You may use space and single quotes in your key names.
 
-You may use dot notation (`data.title`) or brackets with double quotes (`data["title"]`) or single quotes (`data['title']`). You do not need to escape apostrophes (`'`), but you can.
+You may use dot notation (`data.title`) or brackets with double quotes (`data["title"]`) or single quotes (`data['title']`) in the data- attributes. You do not need to escape apostrophes (`'`), but you can.
 
 The following should all work :
 
