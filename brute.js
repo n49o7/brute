@@ -29,8 +29,6 @@ let Brute = {
             let condition = el.getAttribute('data-condition')
             Object.keys(branch).forEach(item => {
                 let test = Brute.compileCondition(iterate, item, condition)
-                console.log(test)
-                console.log(eval(test))
                 if (eval(test)) {
                     let node = document.importNode(template, true)
                     let cells = node.querySelectorAll('[data-bind]')
