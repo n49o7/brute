@@ -71,6 +71,6 @@ A page that will display the data :
 </body>
 
 <style>
-  .row { display: flex; flex-direction: row }
+  .row { display: flex }
 </style>
 ```
