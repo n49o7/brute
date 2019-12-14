@@ -1,47 +1,48 @@
-function Brute() {
+let Brute = {
 
-    function pathResult(path) {
-        return Function(`'use strict'; return (${path})`)()
-    }
-
-    function fillArrays(target=document) {
-        var els = target.querySelectorAll('[data-iterate]')
+    fillArrays: function (target=document) {
+        let els = target.querySelectorAll('[data-iterate]')
         els.forEach(el => {
             el.innerHTML = ''
-            var bind = el.getAttribute('data-iterate')
-            var templateName = el.getAttribute('data-template')
-            var template = pathResult(templateName).content
-            key = pathResult(bind)
-            Object.keys(key).forEach(item => {
-                node = document.importNode(template, true)
-                cells = node.querySelectorAll('[data-bind]')
+            let iterate = el.getAttribute('data-iterate')
+            let branch = eval(iterate)
+            let type = branch.constructor.name
+            let templateName = el.getAttribute('data-template')
+            let template = eval(templateName).content
+            Object.keys(branch).forEach(item => {
+                let node = document.importNode(template, true)
+                let cells = node.querySelectorAll('[data-bind]')
                 cells.forEach(cell => {
-                    var newBind = bind
-                    var oldBind = cell.getAttribute('data-bind')
-                    if (!/[\._]$/g.test(oldBind)) {
-                        newBind += '.'+item+'.'+oldBind
+                    let oldBind = cell.getAttribute('data-bind')
+                    let newBind = ''
+                    if (/^[_]$/g.test(oldBind) && type == 'Object') {
+                        cell.innerHTML = item
+                    } else if (/^[_]$/g.test(oldBind) && type == 'Array') {
+                        newBind = iterate+'['+item+']'
                     } else {
-                        newBind += '['+item+']'
+                        newBind = iterate+'.'+item+'.'+oldBind
                     }
                     cell.setAttribute('data-bind', newBind)
                 })
                 el.append(node)
             })
         })
-    }
+    },
 
-    function fillItems(target=document) {
-        var els = target.querySelectorAll('[data-bind]')
+    fillItems: function (target=document) {
+        let els = target.querySelectorAll('[data-bind]')
         els.forEach(el => {
-            var bind = el.getAttribute('data-bind')
-            result = pathResult(bind)
-            el.innerHTML = result
+            let bind = el.getAttribute('data-bind')
+            if (bind.length > 0) {
+                let result = eval(bind)
+                el.innerHTML = result
+            }
         })
-    }
+    },
 
-    function fill() {
-        fillArrays()
-        fillItems()
+    fill: function () {
+        Brute.fillArrays()
+        Brute.fillItems()
     }
 
 }
