@@ -13,6 +13,7 @@ Define your templates using the standard HTML data- attributes to target a certa
 - `data-bind` : the exact key or variable to use
 - `data-iterate` : a key or variable that is or contains an Object `{}` or an Array `[]`
 - `data-template` : the template to use when iterating
+- `data-condition` : one or several tests to satisfy when iterating
 - `_` : a reference to the current key, variable or object
 
 You may use space and single quotes in you key names.
@@ -67,7 +68,10 @@ A page that will display the data :
 <body>
   
   <div data-bind="data.title"></div>
-  <div data-iterate="data.people" data-template="personTemplate"></div>
+  <div data-iterate="data.people"
+       data-template="personTemplate"
+       data-condition="_.length > 3 && age > 37">
+  </div>
   <div data-iterate="data.notes" data-template="noteTemplate"></div>
   
   <template id="personTemplate">
