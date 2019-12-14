@@ -10,11 +10,11 @@ Most useful when attached to an event.
 
 Define your templates using the standard HTML data- attributes to target a certain key or variable in the data.
 
-`data-bind`: the exact key or variable to use
-`data-iterate`: a key or variable that is or contains an Object `{}` or an Array `[]`
-`data-template`: the template to use when iterating
+- `data-bind` : the exact key or variable to use
+- `data-iterate` : a key or variable that is or contains an Object `{}` or an Array `[]`
+- `data-template` : the template to use when iterating
 
-`_`: a reference to the current key, variable or object
+- `_` : a reference to the current key, variable or object
 
 ## Example
 
