@@ -15,6 +15,19 @@ Define your templates using the standard HTML data- attributes to target a certa
 - `data-template` : the template to use when iterating
 - `_` : a reference to the current key, variable or object
 
+You may use space and single quotes in you key names.
+
+You may use dot notation (`data.title`) or brackets with double quotes (`data["title"]`) or single quotes (`data['title']`). You do not need to escape apostrophes (`'`), but you can.
+
+The following should all work :
+
+- `data-bind="quite[\"some'path\"].you've got.over there"`
+- `data-bind="quite["some\'path"].you\'ve got.over there"`
+- `data-bind="quite["some'path"].you've got.over there"`
+- `data-bind="quite[\'some'path\'].you've got.over there"`
+- `data-bind="quite[\"some'path\"].you've got.over there"`
+- `data-bind="quite.some'path.you've got.over there"`
+
 ## Example
 
 A YAML representation of the data that is passed :
