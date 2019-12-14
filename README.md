@@ -13,7 +13,6 @@ Define your templates using the standard HTML data- attributes to target a certa
 - `data-bind` : the exact key or variable to use
 - `data-iterate` : a key or variable that is or contains an Object `{}` or an Array `[]`
 - `data-template` : the template to use when iterating
-
 - `_` : a reference to the current key, variable or object
 
 ## Example
@@ -23,13 +22,13 @@ A YAML representation of the data that is passed:
 ```yaml
 title: "Class of 2020"
 people:
-  alice
+  alice:
     age: 37
     hair: brunette
-  bob
+  bob:
     age: 34
     hair: blonde
-  charlie
+  charlie:
     age: 59
     hair: grey
 notes:
