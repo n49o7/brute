@@ -21,12 +21,12 @@ You may use dot notation (`data.title`) or brackets with double quotes (`data["t
 
 The following should all work :
 
-- `data-bind="quite[\"some'path\"].you've got.over there"`
-- `data-bind="quite["some\'path"].you\'ve got.over there"`
-- `data-bind="quite["some'path"].you've got.over there"`
-- `data-bind="quite[\'some'path\'].you've got.over there"`
-- `data-bind="quite[\"some'path\"].you've got.over there"`
 - `data-bind="quite.some'path.you've got.over there"`
+- `data-bind="quite[\"some'path\"].you've got.over there"`
+- `data-bind="quite[\"some\'path\"].you've got.over there"`
+- `data-bind="quite['some'path'].you've got.over there"`
+- `data-bind="quite['some\'path'].you\'ve got.over there"`
+- `data-bind="quite[\'some'path\'].you've got.over there"`
 
 ## Example
 
