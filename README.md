@@ -16,6 +16,8 @@ Define your templates using the standard HTML data- attributes to target a certa
 - `data-condition` : one or several tests to satisfy when iterating
 - `_` : a reference to the current key, variable or object
 
+You may replace these keywords by changing the values in the `keywords` variable. Ex: `Brute.keywords.condition = 'if'`.
+
 You may use space and single quotes in your key names.
 
 You may use dot notation (`data.title`) or brackets with double quotes (`data["title"]`) or single quotes (`data['title']`) in the data- attributes. You do not need to escape apostrophes (`'`), but you can.

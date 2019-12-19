@@ -1,3 +1,10 @@
+let keywords = {
+    bind: 'bind',
+    iterate: 'iterate',
+    template: 'template',
+    condition: 'condition'
+}
+
 let Brute = {
 
     scopedEval: function (expression) {
@@ -18,22 +25,22 @@ let Brute = {
     },
 
     fillArrays: function (target=document) {
-        let els = target.querySelectorAll('[data-iterate]')
+        let els = target.querySelectorAll(`[data-${keywords.iterate}]`)
         els.forEach(el => {
             el.innerHTML = ''
-            let iterate = el.getAttribute('data-iterate')
+            let iterate = el.getAttribute(`data-${keywords.iterate}`)
             let branch = Brute.scopedEval(iterate)
             let type = branch.constructor.name
-            let templateName = el.getAttribute('data-template')
+            let templateName = el.getAttribute(`data-${keywords.template}`)
             let template = Brute.scopedEval(templateName).content
-            let condition = el.getAttribute('data-condition')
+            let condition = el.getAttribute(`data-${keywords.condition}`)
             Object.keys(branch).forEach(item => {
                 let test = Brute.compileCondition(iterate, item, condition)
                 if (eval(test)) {
                     let node = document.importNode(template, true)
-                    let cells = node.querySelectorAll('[data-bind]')
+                    let cells = node.querySelectorAll(`[data-${keywords.bind}]`)
                     cells.forEach(cell => {
-                        let oldBind = cell.getAttribute('data-bind')
+                        let oldBind = cell.getAttribute(`data-${keywords.bind}`)
                         let newBind = ''
                         if (/^[_]$/g.test(oldBind) && type == 'Object') {
                             cell.innerHTML = item
@@ -42,7 +49,7 @@ let Brute = {
                         } else {
                             newBind = iterate+'["'+item+'"]'+'["'+oldBind+'"]'
                         }
-                        cell.setAttribute('data-bind', newBind)
+                        cell.setAttribute(`data-${keywords.bind}`, newBind)
                     })
                     el.append(node)
                 }
@@ -51,9 +58,9 @@ let Brute = {
     },
 
     fillItems: function (target=document) {
-        let els = target.querySelectorAll('[data-bind]')
+        let els = target.querySelectorAll(`[data-${keywords.bind}]`)
         els.forEach(el => {
-            let bind = el.getAttribute('data-bind')
+            let bind = el.getAttribute(`data-${keywords.bind}`)
             if (bind.length > 0) {
                 let result = Brute.scopedEval(bind)
                 el.innerHTML = result
