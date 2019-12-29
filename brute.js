@@ -11,6 +11,10 @@ let Brute = {
         return Function(`'use strict'; return (${expression})`)()
     },
 
+    testEval: function (test) {
+        return test.length > 0 ? Brute.scopedEval(test) : true
+    },
+
     compilePath: function (path) {
         x = path.split(/"|\[|\]|(\[\\*["'])|(\\*["']\])|\./g)
         y = [...x.slice(1)].filter(i => /[\w+]/g.test(i) && i !== undefined)
@@ -18,10 +22,18 @@ let Brute = {
         return [x[0], ...z].join('')
     },
 
-    compileCondition: function (iterate, item, condition) {
-        x = condition.split(/(\s*&&\s*|\s*\|\|\s*)/)
-        y = x.map(e => !/(&&|\|\|)/g.test(e) ? /_/g.test(e) ? e.replace('_', "'"+item+"'") : Brute.compilePath(iterate+'.'+item)+'.'+e : e )
-        return y.join('')
+    splitCondition: function (condition) {
+        return condition ? condition.split(/(\s*&&\s*|\s*\|\|\s*)/) : []
+    },
+
+    compileIterateCondition: function (iterate, item, condition) {
+        x = Brute.splitCondition(condition).map(e => !/(&&|\|\|)/g.test(e) ? /_/g.test(e) ? e.replace('_', "'"+item+"'") : Brute.compilePath(iterate+'.'+item)+'.'+e : e )
+        return x.join('')
+    },
+
+    compileCondition: function (bind, condition) {
+        x = Brute.splitCondition(condition).map(e => e.replace('_', bind))
+        return x.join('')
     },
 
     fillArrays: function (target=document) {
@@ -35,13 +47,13 @@ let Brute = {
             let template = Brute.scopedEval(templateName).content
             let condition = el.getAttribute(`data-${keywords.condition}`)
             Object.keys(branch).forEach(item => {
-                let test = Brute.compileCondition(iterate, item, condition)
-                if (eval(test)) {
+                let test = Brute.compileIterateCondition(iterate, item, condition)
+                if (Brute.testEval(test)) {
                     let node = document.importNode(template, true)
                     let cells = node.querySelectorAll(`[data-${keywords.bind}]`)
                     cells.forEach(cell => {
                         let oldBind = cell.getAttribute(`data-${keywords.bind}`)
-                        let newBind = ''
+                        let newBind = oldBind
                         if (/^[_]$/g.test(oldBind) && type == 'Object') {
                             cell.innerHTML = item
                         } else if (/^[_]$/g.test(oldBind) && type == 'Array') {
@@ -61,9 +73,13 @@ let Brute = {
         let els = target.querySelectorAll(`[data-${keywords.bind}]`)
         els.forEach(el => {
             let bind = el.getAttribute(`data-${keywords.bind}`)
-            if (bind.length > 0) {
+            let condition = el.getAttribute(`data-${keywords.condition}`)
+            let test = Brute.compileCondition(bind, condition)
+            if (bind.length > 0 && bind != '_' && Brute.testEval(test)) {
                 let result = Brute.scopedEval(bind)
                 el.innerHTML = result
+            } else if (bind != '_') {
+                el.remove()
             }
         })
     },

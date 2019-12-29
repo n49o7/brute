@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>brute</title>
+		<link rel="stylesheet" href="style.css">
+		<script src="brute.js"></script>
+		<script>
+			let data = {
+				"title": "Class of 2020",
+				"motto": "Ready to rock!",
+				"people": {
+					"alice": {
+						"age": 37,
+						"hair": "brunette"
+					},
+					"bob": {
+						"age": 34,
+						"hair": "blonde"
+					},
+					"charlie": {
+						"age": 59,
+						"hair": "grey"
+					}
+				},
+				"notes": [
+					"List item 1",
+					"List item 2",
+					"List item 3"
+				]
+			}
+		</script>
+	</head>
+	<body>
+
+		<!-- The simplest way to bind. -->
+		<div data-bind="data.title"></div>
+
+		<!-- Here we add a condition: data.motto itself (note the use of '_') must end with '!'.-->
+		<div data-bind="data.motto"
+				 data-condition="_.endsWith('!')">
+		</div>
+
+		<!-- This div will be deleted from the DOM if data.warning itself (referred to with '_') is undefined. -->
+		<div data-bind="data.warning"
+				 data-condition="_">
+		</div>
+
+		<!-- Now we are iterating over the Object data.people. A DOM element will only be inserted for items that satisfy the test, which has two conditions. -->
+		<div data-iterate="data.people"
+				 data-template="personTemplate"
+				 data-condition="_.length > 3 && age > 37">
+		</div>
+
+		<!-- A simple iteration over an Array, but we'll add a twist further down. -->
+		<div data-iterate="data.notes" data-template="noteTemplate"></div>
+
+		<!-- The template we use when iterating over data.people. -->
+		<template id="personTemplate">
+			<div class="row">
+				<div data-bind="_"></div> - 
+				<div data-bind="age"></div> - 
+				<div data-bind="hair"></div>
+			</div>
+		</template>
+
+		<!-- The template we use when iterating over data.nodes. The inserted DOM elements will contain the item itself ('_'), but only if it ends with '2'. -->
+		<template id="noteTemplate">
+			<div data-bind="_"
+					 data-condition="_.endsWith('2')">
+			</div>
+		</template>
+
+	</body>
+	<script>
+		Brute.fill()
+	</script>
+	<style>
+		.row { display: flex }
+	</style>
+</html>

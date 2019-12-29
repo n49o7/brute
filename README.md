@@ -18,19 +18,20 @@ Define your templates using the standard HTML data- attributes to target a certa
 
 You may replace these keywords by changing the values in the `keywords` variable. Ex: `Brute.keywords.condition = 'if'`.
 
-You may use space and single quotes in your key names.
+You may use spaces and single quotes in your key names.
 
-You may use dot notation (`data.title`) or brackets with double quotes (`data["title"]`) or single quotes (`data['title']`) in the data- attributes. You do not need to escape apostrophes (`'`), but you can.
+You may use dot notation (`data.title`) or brackets with double quotes (`data["title"]`) in the data- attributes. You do not need to escape apostrophes (`'`), but you can.
 
 The following should all work :
 
-- `data-bind="quite.some'path.you've got.over there"`
-- `data-bind="quite[some'path].you've got.over there"`
-- `data-bind="quite[\"some'path\"].you've got.over there"`
-- `data-bind="quite[\"some\'path\"].you've got.over there"`
-- `data-bind="quite['some'path'].you've got.over there"`
-- `data-bind="quite['some\'path'].you\'ve got.over there"`
-- `data-bind="quite[\'some'path\'].you've got.over there"`
+- `data-bind="quite.some'path.you've got.there"`
+- `data-bind="quite[some'path].you've got.there"`
+- `data-bind="quite[\"some'path\"].you've got.there"`
+- `data-bind="quite[\"some\'path\"].you've got.there"`
+
+When iterating, you can specify conditions several ways :
+
+- On the container.
 
 ## Example
 
@@ -70,16 +71,18 @@ A page that will display the data :
 <body>
   
   <div data-bind="data.title"></div>
+
   <div data-iterate="data.people"
        data-template="personTemplate"
        data-condition="_.length > 3 && age > 37">
   </div>
+
   <div data-iterate="data.notes" data-template="noteTemplate"></div>
   
   <template id="personTemplate">
     <div class="row">
-      <div data-bind="_"></div>
-      <div data-bind="age"></div>
+      <div data-bind="_"></div> - 
+      <div data-bind="age"></div> - 
       <div data-bind="hair"></div>
     </div>
   </template>
@@ -94,3 +97,10 @@ A page that will display the data :
   .row { display: flex }
 </style>
 ```
+
+A more advanced example, including comments, can be found in `try.html`.
+
+## Limitations
+
+- Security : uses a scoped `eval` function to evaluate conditions. Do not use this server-side!
+- 
