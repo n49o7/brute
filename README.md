@@ -29,9 +29,7 @@ The following should all work :
 - `data-bind="quite[\"some'path\"].you've got.there"`
 - `data-bind="quite[\"some\'path\"].you've got.there"`
 
-When iterating, you can specify conditions several ways :
-
-- On the container.
+When iterating, you can specify conditions on the container or on its children (see `try.html`).
 
 ## Example
 
@@ -103,4 +101,3 @@ A more advanced example, including comments, can be found in `try.html`.
 ## Limitations
 
 - Security : uses a scoped `eval` function to evaluate conditions. Do not use this server-side!
-- 
