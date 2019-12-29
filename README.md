@@ -8,7 +8,7 @@ Can be used once or attached to an event.
 
 ## Usage
 
-Define your templates using the standard HTML data- attributes to target a certain key or variable in the data.
+Define your templates using the standard HTML data- attributes to target a certain key in the data.
 
 - `data-bind` : the exact key or variable to use
 - `data-iterate` : a key or variable that is or contains an Object `{}` or an Array `[]`
