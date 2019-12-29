@@ -1,12 +1,14 @@
 # brute
 
-DOM filler for simple webapps where the data can contain Objects and/or Arrays.
+A simple client-side DOM filler.
 
-Relies on HTML template elements.
+Relies on HTML template elements. Supports iteration and conditions.
 
-Can be used once or attached to an event.
+Use it as a buildless templating library, on page load or attached to some events.
 
 ## Usage
+
+The data can contain Objects and/or Arrays.
 
 Define your templates using the standard HTML data- attributes to target a certain key or variable in the data.
 
