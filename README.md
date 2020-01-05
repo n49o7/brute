@@ -12,9 +12,9 @@ Use it as a data binding and/or templating library :
 
 ## Usage
 
-Define your templates using the standard HTML data- attributes to target a certain key in the data.
+Define your binds using the standard HTML data- attributes.
 
-- `data-bind` : the exact key or variable to use
+- `data-bind` : a key or variable to use
 - `data-iterate` : a key or variable that is or contains an Object `{}` or an Array `[]`
 - `data-template` : the template to use when iterating
 - `data-condition` : one or several tests to satisfy
