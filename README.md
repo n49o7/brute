@@ -17,7 +17,7 @@ Define your templates using the standard HTML data- attributes to target a certa
 - `data-bind` : the exact key or variable to use
 - `data-iterate` : a key or variable that is or contains an Object `{}` or an Array `[]`
 - `data-template` : the template to use when iterating
-- `data-condition` : one or several tests to satisfy when iterating
+- `data-condition` : one or several tests to satisfy
 - `_` : a reference to the current key, variable or object
 
 You may replace these keywords by changing the values in the `keywords` variable. Ex: `Brute.keywords.condition = 'if'`.
