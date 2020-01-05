@@ -1,10 +1,14 @@
 # brute
 
-DOM filler for simple webapps where the data can contain Objects and/or Arrays.
+DOM filler for simple webapps, where the data can contain Objects and/or Arrays.
 
 Relies on HTML template elements.
 
 Can be used once or attached to an event.
+
+Use it as a data binding and/or templating library :
+- It's buildless since it's in the browser.
+- No brackets involved!
 
 ## Usage
 
